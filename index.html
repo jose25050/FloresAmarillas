@@ -1,0 +1,293 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🌼 Flores Amarillas para Pamela</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fff9c4, #ffecb3);
+            color: #5d4037;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Animación de pétalos cayendo */
+        .petal {
+            position: absolute;
+            background: #fbc02d;
+            border-radius: 50% 50% 0 50%;
+            width: 12px;
+            height: 12px;
+            opacity: 0.8;
+            pointer-events: none;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); }
+            100% { transform: translateY(110vh) rotate(720deg); }
+        }
+
+        .container {
+            text-align: center;
+            padding: 50px;
+            background: rgba(255, 255, 255, 0.85);
+            border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            max-width: 90%;
+            width: 500px;
+            z-index: 10;
+            animation: fadeInUp 1.5s ease-out;
+            position: relative;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5em;
+            color: #f57f17;
+            margin: 0 0 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            font-size: 1.4em;
+            margin-bottom: 30px;
+            font-weight: 300;
+            line-height: 1.5;
+        }
+
+        .heart {
+            color: #e65100;
+            font-size: 3em;
+            animation: heartbeat 1.5s infinite;
+            display: block;
+            margin: 20px auto;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .heart:hover {
+            transform: scale(1.1);
+        }
+
+        #secretMessage {
+            display: none;
+            margin-top: 30px;
+            padding: 20px;
+            background: #fff8e1;
+            border-radius: 15px;
+            font-size: 1.1em;
+            line-height: 1.7;
+            text-align: left;
+            white-space: pre-line;
+            border-left: 5px solid #fbc02d;
+        }
+
+        button {
+            background: #fbc02d;
+            color: #5d4037;
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1em;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(251, 192, 45, 0.4);
+            transition: all 0.3s;
+        }
+
+        button:hover {
+            background: #f57f17;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(245, 127, 23, 0.6);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 0.9em;
+            color: #8d6e63;
+            z-index: 10;
+        }
+
+        /* --- FLOR AMARILLA ANIMADA --- */
+        .animated-flower {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 80px;
+            height: 80px;
+            z-index: 5;
+            cursor: pointer;
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.15));
+            transition: all 0.4s ease;
+        }
+
+        .animated-flower:hover {
+            transform: scale(1.2) rotate(10deg);
+        }
+
+        .flower-svg {
+            animation: float 6s ease-in-out infinite, rotateFlower 20s linear infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes rotateFlower {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5em; }
+            .container { padding: 30px 20px; }
+            .animated-flower {
+                width: 60px;
+                height: 60px;
+                top: 10px;
+                right: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Flor amarilla animada (SVG) -->
+    <div class="animated-flower" id="magicFlower">
+        <svg class="flower-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <!-- Tallo -->
+            <line x1="50" y1="100" x2="50" y2="60" stroke="#7cb342" stroke-width="4" stroke-linecap="round"/>
+            <!-- Centro de la flor -->
+            <circle cx="50" cy="45" r="8" fill="#ffeb3b"/>
+            <!-- Pétalos -->
+            <ellipse cx="50" cy="25" rx="8" ry="18" fill="#fdd835" transform="rotate(0 50 45)"/>
+            <ellipse cx="50" cy="25" rx="8" ry="18" fill="#fdd835" transform="rotate(45 50 45)"/>
+            <ellipse cx="50" cy="25" rx="8" ry="18" fill="#fdd835" transform="rotate(90 50 45)"/>
+            <ellipse cx="50" cy="25" rx="8" ry="18" fill="#fdd835" transform="rotate(135 50 45)"/>
+            <ellipse cx="50" cy="25" rx="8" ry="18" fill="#fdd835" transform="rotate(180 50 45)"/>
+            <ellipse cx="50" cy="25" rx="8" ry="18" fill="#fdd835" transform="rotate(225 50 45)"/>
+            <ellipse cx="50" cy="25" rx="8" ry="18" fill="#fdd835" transform="rotate(270 50 45)"/>
+            <ellipse cx="50" cy="25" rx="8" ry="18" fill="#fdd835" transform="rotate(315 50 45)"/>
+            <!-- Hoja -->
+            <path d="M50 70 Q60 60, 65 80 Q60 90, 50 85 Z" fill="#8bc34a" opacity="0.9"/>
+        </svg>
+    </div>
+
+    <div class="container">
+        <h1>Para Pamela 🌼</h1>
+        <p class="subtitle">“Como las flores amarillas, tu luz ilumina hasta el más oscuro de los corazones”</p>
+        
+        <div class="heart" id="heart">💛</div>
+        
+        <button id="revealBtn">💌 Abrir mi carta para ti</button>
+        
+        <div id="secretMessage">
+Amor,
+
+Recuerdo aquel inicio de primavera cuando el sol iluminó nuestro día,
+cuando el momento nos regalo un poco de su tiempo y cuando el lugar nos permitió dar inicio a esta historia.
+Ese día decidí no soltar nunca más tu mano.
+
+Gracias por ser mi luz, mi calma y mi alegría inesperada.
+Te quiero más de lo que las palabras pueden decir... 
+pero aquí estoy, recordándotelo una vez más.
+
+Feliz día de las flores amarillas, feliz aniversario,
+pero más que todas estás celebraciones feliz estoy porque tu estás en mi vida.
+
+Atentamente,
+Jose Rivera 💛
+
+</div>
+    </div>
+
+    <footer>
+        Día de las Flores Amarillas • Creado con ❤️ por Jose Rivera
+    </footer>
+
+    <script>
+        // Crear pétalos animados
+        function createPetal(x = null) {
+            const petal = document.createElement('div');
+            petal.classList.add('petal');
+            petal.style.left = (x || Math.random() * 100) + 'vw';
+            petal.style.animationDuration = (Math.random() * 5 + 5) + 's';
+            document.body.appendChild(petal);
+
+            setTimeout(() => {
+                petal.remove();
+            }, 10000);
+        }
+
+        setInterval(createPetal, 500);
+
+        // Revelar mensaje secreto
+        const heart = document.getElementById('heart');
+        const revealBtn = document.getElementById('revealBtn');
+        const secretMessage = document.getElementById('secretMessage');
+
+        function revealSecret() {
+            secretMessage.style.display = 'block';
+            secretMessage.style.animation = 'fadeInUp 1s ease-out';
+            heart.style.animation = 'heartbeat 3s infinite';
+            revealBtn.style.display = 'none';
+        }
+
+        heart.addEventListener('click', revealSecret);
+        revealBtn.addEventListener('click', revealSecret);
+
+        // Interacción con la flor: al hacer clic, cae un pétalo extra
+        const magicFlower = document.getElementById('magicFlower');
+        magicFlower.addEventListener('click', () => {
+            // Efecto de escala rápida
+            magicFlower.style.transform = 'scale(0.8)';
+            setTimeout(() => {
+                magicFlower.style.transform = '';
+            }, 200);
+
+            // Crear pétalo desde la flor
+            const rect = magicFlower.getBoundingClientRect();
+            const x = (rect.left + rect.width / 2) / window.innerWidth * 100;
+            createPetal(x);
+            
+            // Sonido suave (opcional)
+            // const sound = new Audio('https://assets.mixkit.co/sfx/preview/mixkit-soft-bell-chime-1171.mp3');
+            // sound.volume = 0.2;
+            // sound.play();
+        });
+    </script>
+
+</body>
+</html>
